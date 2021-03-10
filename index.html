@@ -4,29 +4,69 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ahmed's Code Quiz</title>
-  <link rel="stylesheet" href="./asstes/css/reset.css">
+  <title>Code Quiz</title>
   <link rel="stylesheet" href="./asstes/css/style.css">
 </head>
+
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li>High Score:</li>
-        <li>Time : <span>60</span></li>
-      </ul>
-    </nav>
-  </header>
-  <main>
-    <div class="container">
-  <div class = "box">
-    <h1>Coding Quiz Challenge!</h1>
-    <p>Try to answer the following code-related questions within the time limit.
-      Keep in mind that incorrect answers will subtract ten seconds from your scoretime!</p>
-    <button class="btn">Start Quiz</button>
+  <nav class="navbar">
+    <h5 id="high_score_page">View High Scores</h5>
+    <h5>Time: <span id="timer">60</span></h5>
+  </nav>
+  <!-- quiz area -->
+  <section class="main" id="start__quiz">
+
+    <div class="header">
+      <h1 class="title">Coding Quiz</h1>
+    </div>
+    <div class="content">
+      <p>
+        Try to answer the following code-related questions within the time limit.
+        Keep in mind that incorrect answers will subtract ten seconds from your scoretime!
+      </p>
+    </div>
+    <div class="start">
+      <button class="btn" id="start-btn">Start Quiz</button>
+    </div>
+  </section>
+
+  <section class="main" id="question-section">
+    <div class="header">
+      <h2 id="q-title"></h2>
+    </div>
+    <div id="choices"></div>
+    <div class="right" id="right-wrong">your answer is right</div>
+  </section>
+
+  <section class="main" id="end__quiz">
+    <div class="header">
+      <h4 id="end">Your Quiz is finshed</h4>
+    </div>
+    <div class="final-score">
+      <h5>Your final score is: <span id="final-score"></span></p>
   </div>
+
+    <div class="uesr">
+      <input type="text" id="user-name" placeholder="your name">
+      <button class="btn" id="name-submit">Submit</button>
+    </div>
+  </section>
+
+  <section class="main" id="high_score_screen">
+    <div class="header">
+      <h3 id="high_secro_title">
+        Highscrores
+      </h3>
+    </div>
+
+    <ol class="final_score"></ol>
+
+    <div class="row">
+      <button class="btn" id="back">back</button>
+      <button class="btn" id="clear">clear</button>
   </div>
-  
-  </main>
+</section>
+
+<script src="./asstes/js/script.js"></script>
 </body>
 </html>
