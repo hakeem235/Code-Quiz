@@ -5,23 +5,40 @@
   }
 
   body{
-    background: dimgrey;
+    background: whitesmoke;
+  }
+
+  nav { 
+    display: flex;
+    justify-content: space-between;   
+    color: whitesmoke ;
+    font-size:xx-large ;
+    height: 50px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background: rgb(56, 56, 175);
   }
 
 .main {
-  box-shadow: rgba(255, 255, 255, 0.15) ;
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+  border-radius: 10px;
+  color:whitesmoke;
+  box-shadow: rgba(0,0 ,0 , 0.20) ;
   font-size: 18px;
   max-width: 800px;
   padding: 30px 40px;
-  margin-top: 2rem;
+  margin-top: 3rem;
   margin-right: auto;
   margin-left: auto;
-   background-color: whitesmoke;
+   background-color: rgb(56, 56, 175);
 }
 
-h1, h2, p { 
+h1, h2, p {
+  font-size: 1.5rem;
   text-align:center;
-
 }
 
 h1.start__quiz {
@@ -36,21 +53,12 @@ div.content{
   justify-content: center;
 
 }
-
- .header::after {
-  content: " ";
-  display: block;
-  background: #e7e9eb;
-  height: 3px;
-  align-content: center;
-}
-
-
+/* 
 button.btn {
   border: none;
-  background-color: purple;
+  background-color: rgb(58, 174, 219);
   border-radius: 25px;
-  color: hsl(0, 0%, 100%);
+  color:whitesmoke;
   display: inline-block;
   font-size: 22px;
   line-height: 22px;
@@ -59,7 +67,8 @@ button.btn {
   text-align: center;
   cursor: pointer;
   max-width: 200px;
-}
+  justify-content: center;
+} */
 button[disabled] {
   cursor: default;
   background: #c0c7cf;
@@ -68,13 +77,13 @@ button[disabled] {
 #question-section {
   margin-bottom: 2rem;
   visibility: hidden;
-}
+} 
 
 #q-title {
   text-align: left;
   font-weight: 600;
 }
-
+/* 
 .choice {
   border: none;
   background-color: hsl(204, 68%, 50%);
@@ -85,18 +94,18 @@ button[disabled] {
   line-height: 22px;
   padding: 14px 10px 14px 10px;
   margin: 5px 0px 5px 0px;
-}
+} */
 
-#right-wrong {
+ #right-wrong {
   font-style: italic;
   visibility: hidden;
-}
+} 
 
 /* End of Quiz Screen */
-#end {
+ #end__quiz {
   margin-bottom: 2rem;
   visibility: hidden;
-}
+} 
 
 h3 {
   font-weight: 700;
@@ -111,19 +120,19 @@ div.endscreen.h5 {
 div.final_score {
   margin-top: 10px;
 }
-
+/* 
 #score-submit {
   max-width: 150px;
   font-size: 18px;
   line-height: 18px;
   background-color:  hsl(204, 68%, 50%);
-}
+} */
 
-/* Highscore Screen */
+/* Highscore Screen  */
 #high_score_screen {
   visibility: hidden;
-}
-
+} 
+/* 
 #back, #clear, #name-submit {
     border: none;
     background-color: hsl(204, 68%, 50%);
@@ -138,7 +147,7 @@ div.final_score {
     cursor: pointer;
     max-width: fit-content;
     margin-right: 1rem;
-}
+} */
 
 /* Responsiveness for smaller screens */
 @media (max-width: 800px) {
