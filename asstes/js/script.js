@@ -1,4 +1,4 @@
-// Variabled Section 
+// Variabled Section
 // Start Screen variables
 var startBtn = document.getElementById("start-btn");
 var startQuiz = document.getElementById("start__quiz");
@@ -22,58 +22,67 @@ var highScoreScreen = document.getElementById("high_score_page");
 // Timer variable
 var timerDisplay = document.getElementById("timer");
 
-var ans= 0;
+var ans = 0;
 var correct = [];
 var secondsLeft = 60;
 var timerInterval;
 
-// Quiz Questions Section 
+// Quiz Questions Section
 var questions = [
   {
     question: "Which of the following is correct about features of JavaScript?",
-    choices: ["1.  JavaScript is a lightweight, interpreted programming languag", 
-    "2. JavaScript is designed for creating network-centric applications.", 
-    "3. JavaScript is complementary to and integrated with Java.",
-    "4.  All of the above."],
+    choices: [
+      "1.  JavaScript is a lightweight, interpreted programming languag",
+      "2. JavaScript is designed for creating network-centric applications.",
+      "3. JavaScript is complementary to and integrated with Java.",
+      "4.  All of the above.",
+    ],
     correctAns: "4.  All of the above.",
   },
   {
-    question: " Which of the following is the correct syntax to redirect a url using JavaScript?",
-    choices: ["1. document.location='http://www.newlocation.com'; ", 
-    "2. browser.location='http://www.newlocation.com'; ", 
-    "3. navigator.location='http://www.newlocation.com'; ",
-    "4. window.location='http://www.newlocation.com'; "],
+    question:
+      " Which of the following is the correct syntax to redirect a url using JavaScript?",
+    choices: [
+      "1. document.location='http://www.newlocation.com'; ",
+      "2. browser.location='http://www.newlocation.com'; ",
+      "3. navigator.location='http://www.newlocation.com'; ",
+      "4. window.location='http://www.newlocation.com'; ",
+    ],
     correctAns: "4. window.location='http://www.newlocation.com';",
   },
   {
-    question: "Which built-in method returns the character at the specified index?",
-    choices: ["1. characterAt()", 
-    "2. getCharAt()", 
-    "3. charAt()",
-    "4.  Non of the above."],
+    question:
+      "Which built-in method returns the character at the specified index?",
+    choices: [
+      "1. characterAt()",
+      "2. getCharAt()",
+      "3. charAt()",
+      "4.  Non of the above.",
+    ],
     correctAns: "3. charAt()",
   },
   {
-    question: "Which built-in method returns the calling string value converted to lower case?",
-    choices: ["1. toLowerCase()", 
-    "2. toLower() ", 
-    "3. changeCase(case)",
-    "4. None of the above."],
+    question:
+      "Which built-in method returns the calling string value converted to lower case?",
+    choices: [
+      "1. toLowerCase()",
+      "2. toLower() ",
+      "3. changeCase(case)",
+      "4. None of the above.",
+    ],
     correctAns: "1. toLowerCase()  ",
   },
   {
-    question: "Which of the following function of String object executes the search for a match between a regular expression and a specified string?",
-    choices: ["1. concat() ", 
-    "2. match() ", 
-    "3. replace() ",
-    "4. search() "],
+    question:
+      "Which of the following function of String object executes the search for a match between a regular expression and a specified string?",
+    choices: ["1. concat() ", "2. match() ", "3. replace() ", "4. search() "],
     correctAns: "4. search()",
-  }
+  },
 ];
 
-// Function Section 
+// Function Section
 
-// Start the quiz function 
+// Start the quiz function
 
 function startQ() {
   startQuiz.setAttribute("style", "display: none;"); // hiding the start screen
@@ -83,8 +92,7 @@ function startQ() {
 }
 
 // // When start button is clicked, the quiz will begin!
-startBtn.addEventListener("click", startQ);
-
+startBtn.onclick = startQ;
 
 // // Building the question card
 function ceartQuestion() {
@@ -104,21 +112,17 @@ function ceartQuestion() {
   });
 }
 
-
-
 // Determining function for user answer picks
 function decisionClick() {
   // If user chooses the right answer...
   if (this.value === questions[ans].correctAns) {
-    
     rightWrongEl.setAttribute("class", "right");
     rightWrongEl.setAttribute("style", "visibility: visible;");
     rightWrongEl.textContent = "Right!"; // "Right!" is displayed on the screen
     secondsLeft += 10; // 10 seconds is added to the timer
 
-// If user chooses the wrong answer...
+    // If user chooses the wrong answer...
   } else {
-    
     rightWrongEl.setAttribute("class", "wrong");
     rightWrongEl.setAttribute("style", "visibility: visible;");
     rightWrongEl.textContent = "Wrong"; // "Wrong" is displayed on the screen
@@ -134,7 +138,6 @@ function decisionClick() {
   }
 }
 
-
 // Timer function
 function startTimer() {
   timerInterval = setInterval(function () {
@@ -148,8 +151,6 @@ function startTimer() {
     }
   }, 1000);
 }
-
-
 
 // End Quiz Screen
 function gameOver() {
@@ -165,54 +166,35 @@ function gameOver() {
 }
 
 
-// // High Score Screen
-
-nameSubmit.addEventListener(
-  "submit",
-  function (event) {
-    //Add initials to score array
-    finalScoreEl.innerHTML +=
-      "<li>" + userName.value + secondsLeft + "</li>";
-    // Clearing Input
-    userName.value = "";
-    // Saving scores to local storage
-    localStorage.setItem("highScoreList", finalScoreEl.innerHtml);
-  },
-  false
-);
-
-var saved = localStorage.getItem("highScoreList");
-
-// If there are any saved items, update our list
-if (saved) {
-  finalScoreEl.innerHTML = saved;
-}
-
-nameSubmit.addEventListener("click", function () {
-  // listening for that submit click
-  endScreen.setAttribute("style", "display: none;"); // hiding the endScreen
-  highScoreScreen.setAttribute("style", "visibility: visible;"); // showing the highScore Screen
-});
-
-var scores = []; // creating empty array to put high scores
-
 // save the score in the LocalStorage
 function saveScore() {
   var user_Initials = userName.value; // saving the initials from the form
-  localStorage.setItem("scores", JSON.stringify(scores));
+  if (user_Initials !== "") {
+    var highScores = JSON.parse(localStorage.getItem("scores")) || [];
+    var newScore = {
+      score: secondsLeft,
+      name: user_Initials,
+    };
+    highScores.push(newScore);
+    localStorage.setItem("scores", JSON.stringify(highScores));
+  }
+  displayHighScore();
 }
 
-// // 
-// function buildScoreCard() {
-//   finalScoreEl.innerHTML = ""; // Creating space inside the 'high score' element on HTML
+nameSubmit.onclick = saveScore;
 
-//   finalScoreEl.finalScore.forEach(function (scores, i) {
-//     var userScore = userInitials + secondsLeft; // defining the highScore as user's initials w/ score
-//     var finalScore = document.createElement("button"); // creating buttons for high score
+function displayHighScore() {
+  var highScores = JSON.parse(localStorage.getItem("scores")) || [];
+  highScores.sort(function (a, b) {
+    return b.score - a.score;
+  });
 
-//     finalScore.setAttribute("class", "user score"); // setting class to choice to connect to css styling
-//     finalScore.setAttribute("value", newScore); // setting value to initials
-//     finalScore.textContent = newScore; // displaying the text to initials & their score
-//     finalScore.appendChild(userScore); // attaching each high score to another
-//   });
-// }
+  highScores.forEach(function (score) {
+    var liTag = document.createElement("li");
+    liTag.textContent = score.name + " - " + score.score;
+    console.log(liTag)
+    var loTag = document.getElementById("final_score");
+    console.log(loTag)
+    loTag.appendChild(liTag);
+  });
+}
