@@ -10,6 +10,7 @@ var choicesEl = document.getElementById("choices");
 var rightWrongEl = document.getElementById("right-wrong");
 var buttonsEL = document.getElementById("buttons");
 
+
 // End Screen Variables
 var endScreen = document.getElementById("end__quiz");
 var userName = document.getElementById("user-name");
@@ -18,6 +19,9 @@ var nameSubmit = document.getElementById("name-submit");
 // Final Score Screen
 var finalScoreEl = document.getElementById("final-score");
 var highScoreScreen = document.getElementById("high_score_page");
+var highScoreScreenEL = document.getElementById("high_score_screen")
+var backBtn = document.getElementById("back");
+var clearBtn = document.getElementById("clear");
 
 // Timer variable
 var timerDisplay = document.getElementById("timer");
@@ -85,90 +89,78 @@ var questions = [
 // Start the quiz function
 
 function startQ() {
-  startQuiz.setAttribute("style", "display: none;"); // hiding the start screen
-  ceartQuestion(); // building the question card
-  questionScetion.setAttribute("style", "visibility: visible;"); // showing the question card
-  startTimer(); // starting the timer when the button is pressed
+  startQuiz.setAttribute("style", "display: none;"); 
+  ceartQuestion();
+  questionScetion.setAttribute("style", "visibility: visible;"); 
+  startTimer(); 
 }
-
-// // When start button is clicked, the quiz will begin!
 startBtn.onclick = startQ;
 
-// // Building the question card
+// Ceart Question Function 
 function ceartQuestion() {
   var currentQuestion = questions[ans];
-
-  questionTitle.textContent = currentQuestion.question; // Putting each question in the title
-
-  choicesEl.innerHTML = ""; // Creating space inside the 'choices' element
-
+  questionTitle.textContent = currentQuestion.question; 
+  choicesEl.innerHTML = ""; 
   currentQuestion.choices.forEach(function (choice, i) {
-    var choices = document.createElement("button"); // creating buttons for each choice
-    choices.setAttribute("class", "choice"); // setting class to choice to connect to css styling
-    choices.setAttribute("value", choice); // setting inside value for each
-    choices.textContent = choice; // displaying the text of each value
-    choicesEl.appendChild(choices); // attaching each choice to one another
-    choices.onclick = decisionClick; // registering "click" for user decicision
+    var choices = document.createElement("button"); 
+    choices.setAttribute("class", "choice"); 
+    choices.setAttribute("value", choice); 
+    choices.textContent = choice; 
+    choicesEl.appendChild(choices); 
+    choices.onclick = decisionClick; 
   });
 }
 
-// Determining function for user answer picks
+// Chose Question 
 function decisionClick() {
-  // If user chooses the right answer...
   if (this.value === questions[ans].correctAns) {
     rightWrongEl.setAttribute("class", "right");
     rightWrongEl.setAttribute("style", "visibility: visible;");
-    rightWrongEl.textContent = "Right!"; // "Right!" is displayed on the screen
-    secondsLeft += 10; // 10 seconds is added to the timer
-
-    // If user chooses the wrong answer...
+    rightWrongEl.textContent = "Right!";
+    secondsLeft += 10;
   } else {
     rightWrongEl.setAttribute("class", "wrong");
     rightWrongEl.setAttribute("style", "visibility: visible;");
-    rightWrongEl.textContent = "Wrong"; // "Wrong" is displayed on the screen
-    secondsLeft -= 10; // 10 seconds is subtracted from the timer
+    rightWrongEl.textContent = "Wrong"; 
   }
   ans++;
   if (ans === questions.length) {
-    // if the user answers all of the questions..
-    gameOver(); // ...the game ends...
-  } else {
-    // ...otherwise...
-    ceartQuestion(); // ...it continues.
+    questionScetion.setAttribute("style", "display: none;");
+    gameOver();
+  } else { 
+    ceartQuestion(); 
   }
 }
 
 // Timer function
 function startTimer() {
   timerInterval = setInterval(function () {
-    secondsLeft--; // decrements time left
-    timerDisplay.textContent = secondsLeft; // displays remaining time on screen
+    secondsLeft--; 
+    timerDisplay.textContent = secondsLeft; 
 
     if (secondsLeft <= 0) {
-      // if the timer is less than or equal to zero...
-      clearInterval(timerInterval); // timer is clearned and...
-      return gameOver(); // ..."Game Over" function is fired.
+      clearInterval(timerInterval); 
+      return gameOver(); 
     }
   }, 1000);
 }
 
 // End Quiz Screen
 function gameOver() {
-  startQuiz.setAttribute("style", "display: none;"); // hiding the question card
-  endScreen.setAttribute("style", "visibility: visible;"); // showing End Screen Card
-  clearInterval(timerInterval); // clearing the timer
-  timerDisplay.textContent = 0; // setting timer display to zero
+  startQuiz.setAttribute("style", "display: none;"); 
+  endScreen.setAttribute("style", "visibility: visible;");
+
+  clearInterval(timerInterval); 
+  timerDisplay.textContent = 0; 
   if (secondsLeft < 0) {
-    // preventing the time to go below zero
     secondsLeft = 0;
   }
-  finalScoreEl.textContent = secondsLeft; // displays time left on the clock as User Score
+  finalScoreEl.textContent = secondsLeft;
 }
 
-
-// save the score in the LocalStorage
+// save Scoe function 
 function saveScore() {
-  var user_Initials = userName.value; // saving the initials from the form
+  var user_Initials = userName.value; 
   if (user_Initials !== "") {
     var highScores = JSON.parse(localStorage.getItem("scores")) || [];
     var newScore = {
@@ -177,24 +169,55 @@ function saveScore() {
     };
     highScores.push(newScore);
     localStorage.setItem("scores", JSON.stringify(highScores));
+    
   }
   displayHighScore();
 }
-
 nameSubmit.onclick = saveScore;
 
 function displayHighScore() {
   var highScores = JSON.parse(localStorage.getItem("scores")) || [];
+  console.log(highScores);
   highScores.sort(function (a, b) {
     return b.score - a.score;
   });
-
+  
   highScores.forEach(function (score) {
     var liTag = document.createElement("li");
     liTag.textContent = score.name + " - " + score.score;
-    console.log(liTag)
     var loTag = document.getElementById("final_score");
-    console.log(loTag)
     loTag.appendChild(liTag);
   });
+  endScreen.setAttribute("style", "display: none;");
+  highScoreScreenEL.style.visibility = "visible"
 }
+
+
+function startOver (){
+ startQ()
+ backBtn.onclick = startOver();
+}
+
+function showHighScroe(){
+  startQuiz.setAttribute("style", "display: none;");
+  questionScetion.setAttribute("styl", "dispaly: none;")
+  endScreen.setAttribute("style", "display: none;");
+  highScoreScreenEL.style.display = "visible";
+}
+highScoreScreen.onclick = showHighScroe
+
+
+function startOver (){
+
+    ceartQuestion();
+    questionScetion.setAttribute("style", "visibility: visible;"); 
+    startTimer(); 
+  }
+// backBtn.onclick = startOver();
+ 
+// Clear the score 
+// function clearAns (){
+//    localStorage.clear("scores");
+//    clearBtn.onclick = clearAns()
+// 
+
