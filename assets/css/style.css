@@ -115,9 +115,9 @@ button[disabled] {
   margin: 5px 0px 5px 0px;
 }  
 
-
-
-#question-section, 
+#question-section{
+  visibility: hidden;
+}
 #end__quiz, 
 #high_score_screen   {
   margin-bottom: 2rem;
@@ -127,7 +127,6 @@ button[disabled] {
   font-style: italic;
   visibility: hidden;
 } 
-
 
 h3 {
   font-weight: 700;
@@ -149,7 +148,7 @@ div.final_score {
   line-height: 18px;
   background-color:  hsl(204, 68%, 50%);
 } 
-/* 
+
 #back, #clear, #name-submit {
     border: none;
     background-color: hsl(204, 68%, 50%);
@@ -164,7 +163,7 @@ div.final_score {
     cursor: pointer;
     max-width: fit-content;
     margin-right: 1rem;
-} */
+} 
 
 /* Responsiveness for smaller screens */
  @media (max-width: 800px) {
