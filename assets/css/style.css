@@ -115,14 +115,12 @@ button[disabled] {
   margin: 5px 0px 5px 0px;
 }  
 
-#question-section{
-  visibility: hidden;
-}
+/* #question-section
 #end__quiz, 
 #high_score_screen   {
   margin-bottom: 2rem;
   visibility: hidden;
-}
+} */
 #right-wrong {
   font-style: italic;
   visibility: hidden;

@@ -18,8 +18,8 @@ var nameSubmit = document.getElementById("name-submit");
 var finalScoreEl = document.getElementById("final-score");
 var highScoreScreen = document.getElementById("high_score_page");
 var highScoreScreenEL = document.getElementById("high_score_screen")
-var backBtn = document.getElementById("back");
-var clearBtn = document.getElementById("clear");
+ var backBtn = document.querySelector("back");
+// var clearBtn = document.querySelector("clear");
 
 // Timer variable
 var timerDisplay = document.getElementById("timer");
@@ -196,6 +196,29 @@ function showHighScroe() {
 }
 
 
+//function deleteList() {
+  //   displayHighScore.clear();
+  // }
+  // clearBtn.onclick = deleteList
+  
+  // function startOver (){
+  //  startQ()
+  //  backBtn.onclick = startOver();
+  // }
+  // function clearAns (){
+  //    localStorage.clear("scores");
+  //    clearBtn.onclick = clearAns()
+  //}
+  
+  
+  
+  // function startOver (){
+  //   startQ() 
+  //   }
+
+  
+
+
 // Bottons Section
 
 // Botton to start the quiz
@@ -205,36 +228,12 @@ highScoreScreen.onclick = showHighScroe;
 // Botton to submit the the name and the score 
 nameSubmit.onclick = saveScore;
 // Start over botton
-
-
-
-
+backBtn.addEventListener('click' ,() => {
+  window.location.reload (true);
+});
 // clear high score
+// clearBtn.onclick =
 
 
 
 
-
-// function deleteList() {
-//   displayHighScore.clear();
-// }
-// clearBtn.onclick = deleteList
-
-// function startOver (){
-//  startQ()
-//  backBtn.onclick = startOver();
-// }
-
-
-
-
-// function startOver (){
-//   startQ() 
-//   }
-//  backBtn.onclick = startOver();
-// Clear the score 
-
-// function clearAns (){
-//    localStorage.clear("scores");
-//    clearBtn.onclick = clearAns()
-//}
