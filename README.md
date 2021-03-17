@@ -23,3 +23,7 @@ Code Quiz was develop by using HTML, CSS and JavaScript
 ##Deployment of application
 
 [Code Quiz](https://hakeem235.github.io/Code-Quiz/)
+
+##GitHub Repo link
+
+[GitHub Repo](https://github.com/hakeem235/Code-Quiz)
