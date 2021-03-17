@@ -18,8 +18,8 @@ var nameSubmit = document.getElementById("name-submit");
 var finalScoreEl = document.getElementById("final-score");
 var highScoreScreen = document.getElementById("high_score_page");
 var highScoreScreenEL = document.getElementById("high_score_screen")
- var backBtn = document.querySelector("back");
-// var clearBtn = document.querySelector("clear");
+var backBtn = document.querySelector("#back");
+var clearBtn = document.querySelector("#clear");
 
 // Timer variable
 var timerDisplay = document.getElementById("timer");
@@ -103,12 +103,12 @@ function ceartQuestion() {
     choices.setAttribute("value", choice);
     choices.textContent = choice;
     choicesEl.appendChild(choices);
-    choices.onclick = decisionClick;
+    choices.onclick = ansChoes;
   });
 }
 
 // Chose Question 
-function decisionClick() {
+function ansChoes() {
   if (this.value === questions[ans].correctAns) {
     rightWrongEl.setAttribute("class", "right");
     rightWrongEl.style.visibility = "visible";
@@ -173,9 +173,10 @@ function saveScore() {
 // function for get the score from the local Storage
 function displayHighScore() {
   var highScores = JSON.parse(localStorage.getItem("scores")) || [];
-  console.log(highScores);
+  // console.log(highScores);
   highScores.sort(function (a, b) {
     return b.score - a.score;
+
   });
   highScores.forEach(function (score) {
     var liTag = document.createElement("li");
@@ -183,8 +184,8 @@ function displayHighScore() {
     var loTag = document.getElementById("final_score");
     loTag.appendChild(liTag);
   });
-  endScreen.setAttribute("style", "display: none;");
-  highScoreScreenEL.style.visibility = "visible"
+  endScreen.style.display = "none";
+  highScoreScreenEL.style.visibility = "visible";
 }
 
 // function for show the high using view high score Btn
@@ -193,30 +194,15 @@ function showHighScroe() {
   questionScetion.style.display = "none";
   endScreen.style.display = "none";
   highScoreScreenEL.style.visibility = "visible";
+  displayHighScore();
 }
 
-
-//function deleteList() {
-  //   displayHighScore.clear();
-  // }
-  // clearBtn.onclick = deleteList
-  
-  // function startOver (){
-  //  startQ()
-  //  backBtn.onclick = startOver();
-  // }
-  // function clearAns (){
-  //    localStorage.clear("scores");
-  //    clearBtn.onclick = clearAns()
-  //}
-  
-  
-  
-  // function startOver (){
-  //   startQ() 
-  //   }
-
-  
+// funtion for clear the high score 
+var clearAns = function(event) {
+  event.preventDefault
+  localStorage.removeItem("scores")
+  window.location.reload();
+}
 
 
 // Bottons Section
@@ -228,12 +214,11 @@ highScoreScreen.onclick = showHighScroe;
 // Botton to submit the the name and the score 
 nameSubmit.onclick = saveScore;
 // Start over botton
-backBtn.addEventListener('click' ,() => {
-  window.location.reload (true);
+backBtn.addEventListener('click', () => {
+  window.location.reload();
 });
-// clear high score
-// clearBtn.onclick =
-
+// botton to clear the high score
+clearBtn.onclick = clearAns;
 
 
 
